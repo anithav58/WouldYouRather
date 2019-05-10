@@ -9,9 +9,9 @@ class Login extends Component {
 	state = {
 		isLoggedIn: false,
 	};
-	componentDidMount() {
-		this.props.handleInitialData();
-	}
+	// componentDidMount() {
+	// 	this.props.handleInitialData();
+	// }
 
 	handleChange = e => {
 		e.preventDefault();
@@ -49,6 +49,7 @@ class Login extends Component {
 function mapStateToProps({ users }) {
 	return { users };
 }
+
 const mapDispatchToProps = dispatch => {
 	return {
 		login: id => dispatch(setLoggedInUser({ id })),
