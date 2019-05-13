@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { handleSaveQuestionAnswer } from '../actions/questionAnswer';
 import { connect } from 'react-redux';
+import Nav from './Nav';
 
 class ViewPoll extends Component {
 	state = {
 		selectedOption: 'optionOne',
 	};
 	handleChange = e => {
-		debugger;
 		console.log('selected option', e.currentTarget.value);
 		const text = e.currentTarget.value;
 		this.setState(() => ({
@@ -16,20 +16,17 @@ class ViewPoll extends Component {
 	};
 	handleSubmit = e => {
 		e.preventDefault();
-		const { user, question, questionAskedBy } = this.props;
-		debugger;
-		handleSaveQuestionAnswer({
-			qid: question.id,
-			loggedInUser: user.id,
-			answer: this.state.selectedOption,
-		});
+		const { user, question, questionAskedBy, dispatch } = this.props;
+		dispatch(handleSaveQuestionAnswer(user, question.id, this.state.selectedOption));
 	};
 	render() {
-		const { user, question, questionAskedBy } = this.props;
-		const answered = user.questions.includes(question.id);
-
+		const { user, question, questionAskedBy, users } = this.props;
+		const answered = !!user.answers[question.id];
+		const length = Object.keys(users).length;
+		console.log('NEW QUESTION', question);
 		return (
 			<div>
+				<Nav />
 				<h3>Results Page</h3>
 				{!answered ? (
 					<div>
@@ -42,7 +39,7 @@ class ViewPoll extends Component {
 								{question.optionOne.text}
 
 								<input type="radio" name="option" value="optionTwo" onChange={this.handleChange} />
-								{question.optionOne.text}
+								{question.optionTwo.text}
 
 								<div>
 									<button className="btn" onClick={this.handleSubmit}>
@@ -60,7 +57,17 @@ class ViewPoll extends Component {
 						<div>
 							<h3>Results</h3>
 							<span>{question.optionOne.text}</span>
-							<span>{question.optionOne.text}</span>
+							<div>
+								<h3>
+									{question.optionOne.votes.length} out of {length} votes
+								</h3>
+							</div>
+							<span>{question.optionTwo.text}</span>
+							<div>
+								<h3>
+									{question.optionTwo.votes.length} out of {length} votes
+								</h3>
+							</div>
 						</div>
 					</div>
 				)}
@@ -81,6 +88,7 @@ function mapStateToProps({ loggedInUser, users, questions }, props) {
 		user,
 		question,
 		questionAskedBy,
+		users,
 	};
 }
 

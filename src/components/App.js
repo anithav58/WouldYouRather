@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ViewPoll from './ViewPoll';
 
 import { handleInitialData } from '../actions/shared';
+import NewQuestion from './NewQuestion';
 
 class App extends Component {
 	componentDidMount() {
@@ -18,8 +19,10 @@ class App extends Component {
 			<Router>
 				<div className="App">
 					<Route path="/" exact component={Login} />
+
 					<Route path="/home" component={Home} />
 					<Route path="/leaderboard" component={LeaderBoard} />
+					<Route path="/add" component={NewQuestion} />
 					<Route path="/questions/:question_id" component={ViewPoll} />
 				</div>
 			</Router>
