@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { handleSaveQuestionAnswer } from '../actions/questionAnswer';
 import { connect } from 'react-redux';
 import Nav from './Nav';
+import { Redirect } from 'react-router-dom';
 
 class ViewPoll extends Component {
 	state = {
@@ -16,14 +17,17 @@ class ViewPoll extends Component {
 	};
 	handleSubmit = e => {
 		e.preventDefault();
-		const { user, question, questionAskedBy, dispatch } = this.props;
-		dispatch(handleSaveQuestionAnswer(user, question.id, this.state.selectedOption));
+		const { user, question, dispatch } = this.props;
+		dispatch(handleSaveQuestionAnswer(user.id, question.id, this.state.selectedOption));
 	};
 	render() {
 		const { user, question, questionAskedBy, users } = this.props;
+		if (user === undefined) {
+			return <Redirect to="/not-found" />;
+		}
 		const answered = !!user.answers[question.id];
 		const length = Object.keys(users).length;
-		console.log('NEW QUESTION', question);
+		const isEnabled = this.state.selectedOption.length > 0;
 		return (
 			<div>
 				<Nav />
@@ -42,7 +46,7 @@ class ViewPoll extends Component {
 								{question.optionTwo.text}
 
 								<div>
-									<button className="btn" onClick={this.handleSubmit}>
+									<button className="btn" onClick={this.handleSubmit} disabled={!isEnabled}>
 										Submit
 									</button>
 								</div>
@@ -80,7 +84,6 @@ function mapStateToProps({ loggedInUser, users, questions }, props) {
 	const { question_id } = props.match.params;
 
 	let user = Object.values(users).find(user => user.id === loggedInUser.id);
-	//console.log('USER', user, user.questions);
 
 	let question = Object.values(questions).find(question => question.id === question_id);
 	let questionAskedBy = Object.values(users).find(user => user.id === question.author);

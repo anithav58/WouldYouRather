@@ -1,4 +1,4 @@
-import { SET_LOGGEDIN_USER } from '../actions/loggedInUser';
+import { SET_LOGGEDIN_USER, LOGOUT_USER } from '../actions/loggedInUser';
 
 export default function loggedInUser(state = null, action) {
 	switch (action.type) {
@@ -7,6 +7,12 @@ export default function loggedInUser(state = null, action) {
 				...state,
 				...action.id,
 			};
+		case LOGOUT_USER:
+			return {
+				...state,
+				id: null,
+			};
+
 		default:
 			return state;
 	}

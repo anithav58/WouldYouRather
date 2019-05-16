@@ -1,18 +1,16 @@
-import { handleInitialData } from '../actions/shared';
 import { saveQuestionAnswer } from '../utils/api';
+import { updateUsers } from './users';
+import { updateQuestions } from './questions';
+import { showLoading, hideLoading } from 'react-redux-loading';
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER';
-function questionAnswer(authedUser, qid, answer) {
-	return {
-		type: SAVE_QUESTION_ANSWER,
-		authedUser,
-		qid,
-		answer,
-	};
-}
-export function handleSaveQuestionAnswer(authedUser, qid, answer) {
-	return (dispatch, getState) => {
-		return saveQuestionAnswer({ authedUser: authedUser.id, qid, answer }).then(() => {
-			dispatch(handleInitialData());
+
+export function handleSaveQuestionAnswer(loggedUser, qid, answer) {
+	return dispatch => {
+		return saveQuestionAnswer({ authedUser: loggedUser, qid, answer }).then(() => {
+			dispatch(showLoading());
+			dispatch(updateUsers(loggedUser, qid, answer));
+			dispatch(updateQuestions(loggedUser, qid, answer));
+			dispatch(hideLoading());
 		});
 	};
 }

@@ -4,16 +4,20 @@ import Tabs from './Tabs';
 import '../styles/styles.css';
 import UserQuestion from './UserQuestion';
 import Nav from './Nav';
+import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
 	render() {
-		console.log('allquestions', this.props.allQuestions);
+		if (!this.props.loggedInUser) {
+			return <Redirect to="/not-found" />;
+		}
 		const { unansweredQuestions, answeredQuestions } = this.props.allQuestions;
 
 		return (
 			<div>
 				<Nav />
-				<div>
+
+				<div className="container">
 					<Tabs>
 						<div label="Unanswered">
 							{unansweredQuestions.map(question => {
@@ -32,7 +36,7 @@ class Home extends Component {
 	}
 }
 
-function mapStateToProps({ loggedInUser, users, questions }) {
+function mapStateToProps({ loggedInUser, questions }) {
 	const listOfQuestions = Object.values(questions);
 
 	return {
@@ -51,6 +55,7 @@ function mapStateToProps({ loggedInUser, users, questions }) {
 				unansweredQuestions: [],
 			}
 		),
+		loggedInUser: loggedInUser,
 	};
 }
 export default connect(mapStateToProps)(Home);

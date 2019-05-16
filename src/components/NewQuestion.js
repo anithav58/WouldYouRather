@@ -34,7 +34,11 @@ class NewQuestion extends Component {
 		}));
 	};
 	render() {
-		const { toHome } = this.state;
+		if (!this.props.loggedInUser) {
+			return <Redirect to="/not-found" />;
+		}
+		const { toHome, optionOneText, optionTwoText } = this.state;
+		const isEnabled = optionOneText.length > 0 && optionTwoText.length > 0;
 		if (toHome === true) {
 			return <Redirect to="/home" />;
 		}
@@ -50,7 +54,7 @@ class NewQuestion extends Component {
 						<span>or</span>
 						<input type="text" name="optionTwo" placeholder="Option 2" onChange={this.handleChange} />
 					</div>
-					<button className="btn" type="submit">
+					<button className="btn" type="submit" disabled={!isEnabled}>
 						SUBMIT
 					</button>
 				</form>
