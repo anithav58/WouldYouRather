@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LeaderBoardCard from './LeaderBoardCard';
-import Nav from './Nav';
+import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
 
 class LeaderBoard extends Component {
@@ -14,15 +14,14 @@ class LeaderBoard extends Component {
 		const users = listOfUsers.sort((a, b) => b.score - a.score);
 
 		return (
-			<div>
-				<Nav />
+			<Layout>
 				<h3>Welcome to Leaderboard !</h3>
 				<div>
 					{users.map(user => {
 						return <LeaderBoardCard key={user.id} user={user} />;
 					})}
 				</div>
-			</div>
+			</Layout>
 		);
 	}
 }

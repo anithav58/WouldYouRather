@@ -21,12 +21,14 @@ class UserQuestion extends Component {
 
 		return (
 			<div className="user-question-card">
-				<h3>{user.name}</h3>
-				<div>
-					<img src={avatarURL} alt="Author's avatar" className="avatar" />
-					<div>
-						<h4>Would you rather?</h4>
-						<span>..{question.optionOne.text}..</span>
+				<h4>{user.name} asks:</h4>
+				<div className="user-question-card-content">
+					<div className="user-question-card-img">
+						<img src={avatarURL} alt="Author's avatar" className="avatar" />
+					</div>
+					<div className="user-question-card-question">
+						<h5>Would you rather?</h5>
+						<div>..{question.optionOne.text}..</div>
 						{
 							<Link to={`questions/${question.id}`}>
 								<button className="btn">View Poll</button>

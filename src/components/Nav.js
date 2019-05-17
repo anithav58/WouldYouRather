@@ -39,20 +39,20 @@ class Nav extends Component {
 						</NavLink>
 					</li>
 					<li>
+						{/* <div> */}
 						{user && (
-							<span>
-								Hello,{user.name}
-								<img src={user.avatarURL} alt="User's Avatar" className="avatar" />
-							</span>
+							<div className="nav-user-wrapper">
+								<span>Hello, {user.name}</span>
+								<img src={user.avatarURL} alt="User's Avatar" className="nav-user-avatar" />
+							</div>
 						)}
+						{/* </div> */}
 					</li>
 					<li>
-						<button className="active" onClick={this.handleLogout}>
-							Logout
-						</button>
+						<button onClick={this.handleLogout}>Logout</button>
 						{/* <NavLink to="/" activeClassName="active" onClick={this.handleLogout}>
-							Logout
-						</NavLink> */}
+								  Logout
+							  </NavLink> */}
 					</li>
 				</ul>
 			</nav>

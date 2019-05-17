@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import '../styles/App.css';
+// import '../styles/App.css';
 import Login from './Login';
 import { connect } from 'react-redux';
 import Home from './Home';

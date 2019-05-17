@@ -9,9 +9,6 @@ class Login extends Component {
 	state = {
 		isLoggedIn: false,
 	};
-	// componentDidMount() {
-	// 	this.props.handleInitialData();
-	// }
 
 	handleChange = e => {
 		e.preventDefault();

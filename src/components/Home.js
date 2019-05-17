@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tabs from './Tabs';
-import '../styles/styles.css';
+// import '../styles/styles.css';
 import UserQuestion from './UserQuestion';
-import Nav from './Nav';
+import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
@@ -14,24 +14,22 @@ class Home extends Component {
 		const { unansweredQuestions, answeredQuestions } = this.props.allQuestions;
 
 		return (
-			<div>
-				<Nav />
-
-				<div className="container">
-					<Tabs>
-						<div label="Unanswered">
-							{unansweredQuestions.map(question => {
-								return <UserQuestion key={question.id} question={question} />;
-							})}
-						</div>
-						<div label="Answered">
-							{answeredQuestions.map(question => {
-								return <UserQuestion key={question.id} question={question} />;
-							})}
-						</div>
-					</Tabs>
-				</div>
-			</div>
+			<Layout>
+				{/* <div className="container"> */}
+				<Tabs>
+					<div label="Unanswered">
+						{unansweredQuestions.map(question => {
+							return <UserQuestion key={question.id} question={question} />;
+						})}
+					</div>
+					<div label="Answered">
+						{answeredQuestions.map(question => {
+							return <UserQuestion key={question.id} question={question} />;
+						})}
+					</div>
+				</Tabs>
+				{/* </div> */}
+			</Layout>
 		);
 	}
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { handleSaveQuestionAsync } from '../actions/questions';
 
 import { connect } from 'react-redux';
-import Nav from './Nav';
+import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
 
 class NewQuestion extends Component {
@@ -12,7 +12,6 @@ class NewQuestion extends Component {
 		toHome: false,
 	};
 	handleChange = e => {
-		//debugger;
 		const text = e.target.value;
 		if (e.target.name === 'optionOne') {
 			this.setState(() => ({ optionOneText: text }));
@@ -43,8 +42,7 @@ class NewQuestion extends Component {
 			return <Redirect to="/home" />;
 		}
 		return (
-			<div>
-				<Nav />
+			<Layout>
 				<h2>Create New Question</h2>
 				<h4>Complete the Question:</h4>
 				<h3>Would you rather...</h3>
@@ -58,7 +56,7 @@ class NewQuestion extends Component {
 						SUBMIT
 					</button>
 				</form>
-			</div>
+			</Layout>
 		);
 	}
 }

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { handleSaveQuestionAnswer } from '../actions/questionAnswer';
 import { connect } from 'react-redux';
-import Nav from './Nav';
+import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
+
+function getVotesPercentage(option, totalVotes) {
+	return totalVotes > 0 ? Math.round((option * 100) / totalVotes) : 0;
+}
 
 class ViewPoll extends Component {
 	state = {
 		selectedOption: 'optionOne',
 	};
+
 	handleChange = e => {
 		console.log('selected option', e.currentTarget.value);
 		const text = e.currentTarget.value;
@@ -21,30 +26,36 @@ class ViewPoll extends Component {
 		dispatch(handleSaveQuestionAnswer(user.id, question.id, this.state.selectedOption));
 	};
 	render() {
-		const { user, question, questionAskedBy, users } = this.props;
+		const { user, question, questionAskedBy } = this.props;
 		if (user === undefined) {
 			return <Redirect to="/not-found" />;
 		}
 		const answered = !!user.answers[question.id];
-		const length = Object.keys(users).length;
+		const optionOneVotesLength = answered ? question.optionOne.votes.length : 0;
+		const optionTwoVotesLength = answered ? question.optionTwo.votes.length : 0;
+		const totalVotes = optionOneVotesLength + optionTwoVotesLength;
+		const optionOnePercent = getVotesPercentage(optionOneVotesLength, totalVotes);
+		const optionTwoPercent = getVotesPercentage(optionTwoVotesLength, totalVotes);
 		const isEnabled = this.state.selectedOption.length > 0;
 		return (
-			<div>
-				<Nav />
-				<h3>Results Page</h3>
+			<Layout>
 				{!answered ? (
-					<div>
-						<h3>{questionAskedBy.name} asks:</h3>
-						<div>
-							<img src={questionAskedBy.avatarURL} alt="Users avatar " className="avatar" />
-							<div>
-								<div>Would you Rather:</div>
-								<input type="radio" name="option" value="optionOne" onChange={this.handleChange} />
-								{question.optionOne.text}
-
-								<input type="radio" name="option" value="optionTwo" onChange={this.handleChange} />
-								{question.optionTwo.text}
-
+					<div className="poll-result">
+						<h4>Asked by {questionAskedBy.name} </h4>
+						<div className="user-question-card-content">
+							<div className="user-question-card-img">
+								<img src={questionAskedBy.avatarURL} alt="Users avatar " className="avatar" />
+							</div>
+							<div className="user-question-card-question results">
+								<h4>Would you Rather..</h4>
+								<div className="radio-button">
+									<input type="radio" name="option" value="optionOne" onChange={this.handleChange} />
+									<label>{question.optionOne.text}</label>
+								</div>
+								<div className="radio-button">
+									<input type="radio" name="option" value="optionTwo" onChange={this.handleChange} />
+									<label>{question.optionTwo.text}</label>
+								</div>
 								<div>
 									<button className="btn" onClick={this.handleSubmit} disabled={!isEnabled}>
 										Submit
@@ -54,28 +65,57 @@ class ViewPoll extends Component {
 						</div>
 					</div>
 				) : (
-					<div>
-						<h3>Poll Results</h3>
-						<span>Asked By {questionAskedBy.name}</span>
-						<img src={questionAskedBy.avatarURL} alt="Users avatar " className="avatar" />
-						<div>
-							<h3>Results</h3>
-							<span>{question.optionOne.text}</span>
-							<div>
-								<h3>
-									{question.optionOne.votes.length} out of {length} votes
-								</h3>
+					<div className="tabs ">
+						<h4>Asked By {questionAskedBy.name}</h4>
+						<div className="user-question-card-content">
+							<div className="user-question-card-img">
+								<img src={questionAskedBy.avatarURL} alt="Users avatar " className="avatar" />
 							</div>
-							<span>{question.optionTwo.text}</span>
 							<div>
-								<h3>
-									{question.optionTwo.votes.length} out of {length} votes
-								</h3>
+								<div className="caption">Results:</div>
+								<div className="view-poll-result">
+									<div className="result-card">
+										<div className="sub-title">Would you rather {question.optionOne.text}</div>
+										<div className="result-progress">
+											<div
+												className="result-filled"
+												style={{
+													width: `${optionOnePercent}%`,
+												}}
+											>
+												<div className="result-percentage">{optionOnePercent}%</div>
+											</div>
+										</div>
+										<div>
+											<h3>
+												{optionOneVotesLength} out of {totalVotes} votes
+											</h3>
+										</div>
+									</div>
+									<div className="result-card">
+										<div className="sub-title">Would you rather {question.optionTwo.text}</div>
+										<div className="result-progress">
+											<div
+												className="result-filled"
+												style={{
+													width: `${optionTwoPercent}%`,
+												}}
+											>
+												<div className="result-percentage">{optionTwoPercent}%</div>
+											</div>
+										</div>
+										<div>
+											<h3>
+												{optionTwoVotesLength} out of {totalVotes} votes
+											</h3>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				)}
-			</div>
+			</Layout>
 		);
 	}
 }
