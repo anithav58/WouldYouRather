@@ -27,18 +27,22 @@ class Login extends Component {
 
 		console.log('USERS', users);
 		return (
-			<div>
-				<h3>Welcome to Would you Rather App</h3>
-				<img src={logo} alt="App Logo" />
-				<h4 className="center">Sign In</h4>
-				<select value={this.state.selected} onChange={this.handleChange}>
-					<option value="" key="Select" />
-					{userKeys.map(user => (
-						<option key={user.id} value={user.id}>
-							{user.name}
-						</option>
-					))}
-				</select>
+			<div className="login-page">
+				<div className="caption">Welcome to Would you Rather App</div>
+				<div className="app-logo">
+					<img src={logo} alt="App Logo" />
+				</div>
+				<div className="center">Sign In</div>
+				<div>
+					<select value={this.state.selected} onChange={this.handleChange}>
+						<option value="" key="Select" />
+						{userKeys.map(user => (
+							<option key={user.id} value={user.id}>
+								{user.name}
+							</option>
+						))}
+					</select>
+				</div>
 			</div>
 		);
 	}

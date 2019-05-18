@@ -29,12 +29,12 @@ class Nav extends Component {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/add" activeClassName="active">
+						<NavLink to="/add" exact activeClassName="active">
 							New Question
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/leaderboard" activeClassName="active">
+						<NavLink to="/leaderboard" exact activeClassName="active">
 							Leader Board
 						</NavLink>
 					</li>
@@ -49,7 +49,9 @@ class Nav extends Component {
 						{/* </div> */}
 					</li>
 					<li>
-						<button onClick={this.handleLogout}>Logout</button>
+						<button className="logout-btn" onClick={this.handleLogout}>
+							Logout
+						</button>
 						{/* <NavLink to="/" activeClassName="active" onClick={this.handleLogout}>
 								  Logout
 							  </NavLink> */}

@@ -43,19 +43,22 @@ class NewQuestion extends Component {
 		}
 		return (
 			<Layout>
-				<h2>Create New Question</h2>
-				<h4>Complete the Question:</h4>
-				<h3>Would you rather...</h3>
-				<form onSubmit={this.handleSubmit}>
-					<div>
+				<div className="tabs">
+					<div className="title">Create New Question</div>
+					<div className="additional-title">Complete the Question:</div>
+					<div className="sub-title">Would you rather...</div>
+					<form onSubmit={this.handleSubmit}>
+						{/* <div className="new-question-form"> */}
+
 						<input type="text" name="optionOne" placeholder="Option 1" onChange={this.handleChange} />
-						<span>or</span>
+						<div>---------OR----------</div>
 						<input type="text" name="optionTwo" placeholder="Option 2" onChange={this.handleChange} />
-					</div>
-					<button className="btn" type="submit" disabled={!isEnabled}>
-						SUBMIT
-					</button>
-				</form>
+
+						<button className="btn" type="submit" disabled={!isEnabled}>
+							SUBMIT
+						</button>
+					</form>
+				</div>
 			</Layout>
 		);
 	}

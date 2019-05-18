@@ -3,6 +3,7 @@ import { handleSaveQuestionAnswer } from '../actions/questionAnswer';
 import { connect } from 'react-redux';
 import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
+import vote from '../images/vote.jpeg';
 
 function getVotesPercentage(option, totalVotes) {
 	return totalVotes > 0 ? Math.round((option * 100) / totalVotes) : 0;
@@ -37,6 +38,7 @@ class ViewPoll extends Component {
 		const optionOnePercent = getVotesPercentage(optionOneVotesLength, totalVotes);
 		const optionTwoPercent = getVotesPercentage(optionTwoVotesLength, totalVotes);
 		const isEnabled = this.state.selectedOption.length > 0;
+
 		return (
 			<Layout>
 				{!answered ? (
@@ -75,6 +77,11 @@ class ViewPoll extends Component {
 								<div className="caption">Results:</div>
 								<div className="view-poll-result">
 									<div className="result-card">
+										{optionOneVotesLength > 0 && (
+											<div className="vote-wrapper">
+												<img src={vote} alt="user's vote " className="vote" />
+											</div>
+										)}
 										<div className="sub-title">Would you rather {question.optionOne.text}</div>
 										<div className="result-progress">
 											<div
@@ -93,6 +100,11 @@ class ViewPoll extends Component {
 										</div>
 									</div>
 									<div className="result-card">
+										{optionTwoVotesLength > 0 && (
+											<div className="vote-wrapper">
+												<img src={vote} alt="user's vote" className="vote" />
+											</div>
+										)}
 										<div className="sub-title">Would you rather {question.optionTwo.text}</div>
 										<div className="result-progress">
 											<div

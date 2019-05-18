@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import LeaderBoardCard from './LeaderBoardCard';
 import Layout from './Layout';
 import { Redirect } from 'react-router-dom';
+import goldcup from '../images/goldcup.png';
+import silvercup from '../images/silvercup.jpeg';
+import bronzecup from '../images/bronzecup.jpeg';
 
 class LeaderBoard extends Component {
 	render() {
@@ -15,10 +18,14 @@ class LeaderBoard extends Component {
 
 		return (
 			<Layout>
-				<h3>Welcome to Leaderboard !</h3>
-				<div>
-					{users.map(user => {
-						return <LeaderBoardCard key={user.id} user={user} />;
+				<div className="leaderboard">
+					{users.map((user, index) => {
+						let imgCup = undefined;
+						if (index === 0) imgCup = goldcup;
+						if (index === 1) imgCup = silvercup;
+						if (index === 2) imgCup = bronzecup;
+
+						return <LeaderBoardCard key={user.id} user={user} imgCup={imgCup} />;
 					})}
 				</div>
 			</Layout>

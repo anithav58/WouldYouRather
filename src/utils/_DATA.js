@@ -1,8 +1,12 @@
+import Anitha from '../images/Anitha.jpeg';
+import Brettlee from '../images/brettlee.jpeg';
+import Sachin from '../images/sachin.jpeg';
+
 let users = {
-	sarahedo: {
-		id: 'sarahedo',
-		name: 'Sarah Edo',
-		avatarURL: 'https://tylermcginnis.com/would-you-rather/sarah.jpg',
+	anithavemuri: {
+		id: 'anithavemuri',
+		name: 'Anitha Vemuri',
+		avatarURL: Anitha,
 		answers: {
 			'8xf0y6ziyjabvozdd253nd': 'optionOne',
 			'6ni6ok3ym7mf1p33lnez': 'optionTwo',
@@ -11,20 +15,20 @@ let users = {
 		},
 		questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9'],
 	},
-	tylermcginnis: {
-		id: 'tylermcginnis',
-		name: 'Tyler McGinnis',
-		avatarURL: 'https://tylermcginnis.com/would-you-rather/tyler.jpg',
+	brettlee: {
+		id: 'brettlee',
+		name: 'Brett Lee',
+		avatarURL: Brettlee,
 		answers: {
 			vthrdm985a262al8qx3do: 'optionOne',
 			xj352vofupe1dqz9emx13r: 'optionTwo',
 		},
 		questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do'],
 	},
-	johndoe: {
-		id: 'johndoe',
-		name: 'John Doe',
-		avatarURL: 'https://tylermcginnis.com/would-you-rather/dan.jpg',
+	sachinten: {
+		id: 'sachinten',
+		name: 'Sachin Tendulkar',
+		avatarURL: Sachin,
 		answers: {
 			xj352vofupe1dqz9emx13r: 'optionOne',
 			vthrdm985a262al8qx3do: 'optionTwo',
@@ -37,82 +41,82 @@ let users = {
 let questions = {
 	'8xf0y6ziyjabvozdd253nd': {
 		id: '8xf0y6ziyjabvozdd253nd',
-		author: 'sarahedo',
+		author: 'anithavemuri',
 		timestamp: 1467166872634,
 
 		optionOne: {
-			votes: ['sarahedo'],
-			text: 'have horrible short term memory',
+			votes: ['anithavemuri'],
+			text: 'be fit',
 		},
 		optionTwo: {
 			votes: [],
-			text: 'have horrible long term memory',
+			text: 'be fat',
 		},
 	},
 	'6ni6ok3ym7mf1p33lnez': {
 		id: '6ni6ok3ym7mf1p33lnez',
-		author: 'johndoe',
+		author: 'sachinten',
 		timestamp: 1468479767190,
 		optionOne: {
 			votes: [],
-			text: 'become a superhero',
+			text: 'become a cricketer',
 		},
 		optionTwo: {
-			votes: ['johndoe', 'sarahedo'],
-			text: 'become a supervillain',
+			votes: ['sachinten', 'anithavemuri'],
+			text: 'become an actor',
 		},
 	},
 	am8ehyc8byjqgar0jgpub9: {
 		id: 'am8ehyc8byjqgar0jgpub9',
-		author: 'sarahedo',
+		author: 'anithavemuri',
 		timestamp: 1488579767190,
 		optionOne: {
 			votes: [],
-			text: 'be telekinetic',
+			text: 'dress classy',
 		},
 		optionTwo: {
-			votes: ['sarahedo'],
-			text: 'be telepathic',
+			votes: ['anithavemuri'],
+			text: 'dress casual',
 		},
 	},
 	loxhs1bqm25b708cmbf3g: {
 		id: 'loxhs1bqm25b708cmbf3g',
-		author: 'tylermcginnis',
+		author: 'brettlee',
 		timestamp: 1482579767190,
 		optionOne: {
 			votes: [],
-			text: 'be a front-end developer',
+			text: 'be a fast-bowler',
 		},
 		optionTwo: {
-			votes: ['sarahedo'],
-			text: 'be a back-end developer',
+			votes: ['anithavemuri'],
+			text: 'be a guitarist',
 		},
 	},
 	vthrdm985a262al8qx3do: {
 		id: 'vthrdm985a262al8qx3do',
-		author: 'tylermcginnis',
+		author: 'brettlee',
 		timestamp: 1489579767190,
 		optionOne: {
-			votes: ['tylermcginnis'],
-			text: 'find $50 yourself',
+			votes: ['brettlee'],
+			text: 'live in India',
 		},
 		optionTwo: {
-			votes: ['johndoe'],
-			text: 'have your best friend find $500',
+			votes: ['sachinten'],
+			text: 'live in Australia',
 		},
 	},
 	xj352vofupe1dqz9emx13r: {
 		id: 'xj352vofupe1dqz9emx13r',
-		author: 'johndoe',
+		author: 'sachinten',
 		timestamp: 1493579767190,
 
 		optionOne: {
-			votes: ['johndoe'],
-			text: 'write JavaScript',
+			votes: ['sachinten'],
+			text: 'be loved by all',
 		},
 		optionTwo: {
-			votes: ['tylermcginnis'],
-			text: 'write Swift',
+			votes: ['brettlee'],
+			text: 'be feared by all ',
 		},
 	},
 };
