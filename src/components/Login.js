@@ -20,12 +20,11 @@ class Login extends Component {
 	render() {
 		const { isLoggedIn } = this.state;
 		if (isLoggedIn === true) {
-			return <Redirect to="/home" />;
+			let { redirectUrl } = this.props.location.state ? this.props.location.state : { redirectUrl: '/home' };
+			return <Redirect to={redirectUrl} />;
 		}
 		const { users } = this.props;
 		const userKeys = Object.values(users);
-
-		console.log('USERS', users);
 		return (
 			<div className="login-page">
 				<div className="caption">Welcome to Would you Rather App</div>

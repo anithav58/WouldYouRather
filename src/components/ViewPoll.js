@@ -28,7 +28,10 @@ class ViewPoll extends Component {
 	};
 	render() {
 		const { user, question, questionAskedBy } = this.props;
-		if (user === undefined) {
+		if (!user) {
+			return <Redirect to={{ pathname: '/', state: { redirectUrl: this.props.location.pathname } }} />;
+		}
+		if (!question) {
 			return <Redirect to="/not-found" />;
 		}
 		const answered = !!user.answers[question.id];
@@ -138,7 +141,7 @@ function mapStateToProps({ loggedInUser, users, questions }, props) {
 	let user = Object.values(users).find(user => user.id === loggedInUser.id);
 
 	let question = Object.values(questions).find(question => question.id === question_id);
-	let questionAskedBy = Object.values(users).find(user => user.id === question.author);
+	let questionAskedBy = !!question ? Object.values(users).find(user => user.id === question.author) : null;
 	return {
 		user,
 		question,

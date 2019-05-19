@@ -34,7 +34,7 @@ class NewQuestion extends Component {
 	};
 	render() {
 		if (!this.props.loggedInUser) {
-			return <Redirect to="/not-found" />;
+			return <Redirect to={{ pathname: '/', state: { redirectUrl: this.props.location.pathname } }} />;
 		}
 		const { toHome, optionOneText, optionTwoText } = this.state;
 		const isEnabled = optionOneText.length > 0 && optionTwoText.length > 0;

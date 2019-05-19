@@ -10,7 +10,7 @@ import bronzecup from '../images/bronzecup.jpeg';
 class LeaderBoard extends Component {
 	render() {
 		if (!this.props.loggedInUser) {
-			return <Redirect to="/not-found" />;
+			return <Redirect to={{ pathname: '/', state: { redirectUrl: this.props.location.pathname } }} />;
 		}
 		const { listOfUsers } = this.props;
 

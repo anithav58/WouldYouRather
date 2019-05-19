@@ -3,8 +3,12 @@
 Project Setup:
 
 Clone the Project - git@github.com: https://github.com/anithav58/WouldYouRather
-install the dependencies - npm install
+
 App is created using [Create React App](https://github.com/facebook/create-react-app)
+
+To install the dependencies for the application use 'npm install'
+To start the application, use 'npm start'.
+The user sees a login page once the applciation is started.
 
 Navigation:
 User can login from the list of users available.

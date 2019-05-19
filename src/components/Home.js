@@ -9,7 +9,7 @@ import { Redirect } from 'react-router-dom';
 class Home extends Component {
 	render() {
 		if (!this.props.loggedInUser) {
-			return <Redirect to="/not-found" />;
+			return <Redirect to={{ pathname: '/', state: { redirectUrl: this.props.location.pathname } }} />;
 		}
 		const { unansweredQuestions, answeredQuestions } = this.props.allQuestions;
 
@@ -35,7 +35,7 @@ class Home extends Component {
 }
 
 function mapStateToProps({ loggedInUser, questions }) {
-	const listOfQuestions = Object.values(questions);
+	const listOfQuestions = Object.values(questions).sort((a, b) => b.timestamp - a.timestamp);
 
 	return {
 		allQuestions: listOfQuestions.reduce(
